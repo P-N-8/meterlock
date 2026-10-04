@@ -1,0 +1,70 @@
+name: Alpha feedback
+description: Report your MeterLock external-alpha test
+title: "Alpha feedback: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for testing MeterLock. Please do not include API keys, mlk_live_ keys, private prompts, or other secrets.
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: e.g. Windows 11
+    validations:
+      required: true
+  - type: input
+    id: python
+    attributes:
+      label: Python version
+      placeholder: e.g. 3.13.15
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: Did installation work without bespoke help?
+      options:
+        - "Yes"
+        - "No"
+        - "Partly"
+    validations:
+      required: true
+  - type: textarea
+    id: stuck
+    attributes:
+      label: Where did you get stuck?
+      description: Exact step/error is more useful than a polished summary.
+  - type: dropdown
+    id: understood
+    attributes:
+      label: Was the finite-wallet idea immediately understandable?
+      options:
+        - "Yes"
+        - "Mostly"
+        - "No"
+    validations:
+      required: true
+  - type: textarea
+    id: lifecycle
+    attributes:
+      label: Pause / resume / revoke results
+      description: What worked or failed?
+    validations:
+      required: true
+  - type: dropdown
+    id: use
+    attributes:
+      label: Would you use this for an unattended AI run?
+      options:
+        - "Yes"
+        - "Maybe"
+        - "No"
+    validations:
+      required: true
+  - type: textarea
+    id: pay
+    attributes:
+      label: Would you pay for a polished self-service version?
+      description: If yes or maybe, what problem would it need to protect and what would make it worth paying for?
