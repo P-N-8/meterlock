@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MeterLock — Finite wallets for AI agents</title>
+  <meta name="description" content="Give one AI agent or unattended run a finite wallet. Pause, resume or revoke it before spend runs away.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="mark" aria-hidden="true">ML<span>⌁</span></div>
+      <p class="eyebrow">EXTERNAL DEVELOPER ALPHA · v0.2.0</p>
+      <h1>Give an AI agent<br><em>a finite wallet.</em></h1>
+      <p class="lede">MeterLock is a local spend-control gateway for unattended AI runs. It reserves budget before generation, then blocks requests that no longer fit inside the wallet you authorised.</p>
+      <div class="actions">
+        <a class="primary" href="https://github.com/P-N-8/meterlock">Test the alpha</a>
+        <a class="secondary" href="https://github.com/P-N-8/meterlock/blob/main/ALPHA_TEST.md">See the 10-minute test</a>
+      </div>
+      <p class="note">Async testing only. No calls. No meetings. Use a dedicated low-limit OpenAI key and tiny test wallets.</p>
+    </section>
+
+    <section class="grid">
+      <article>
+        <span class="num">01</span>
+        <h2>Create a wallet</h2>
+        <p>Set a budget and expiry for one specific agent or run.</p>
+      </article>
+      <article>
+        <span class="num">02</span>
+        <h2>Hand over a scoped key</h2>
+        <p>The agent receives a MeterLock key tied to that wallet — not your upstream provider key.</p>
+      </article>
+      <article>
+        <span class="num">03</span>
+        <h2>Stop spend before generation</h2>
+        <p>Budget is reserved before forwarding. If the request will not fit, generation is refused.</p>
+      </article>
+      <article>
+        <span class="num">04</span>
+        <h2>Pause, resume, revoke</h2>
+        <p>Pause temporarily, resume when ready, or revoke the scoped key permanently.</p>
+      </article>
+    </section>
+
+    <section class="proof">
+      <div>
+        <p class="eyebrow">PROVEN BEFORE EXTERNAL ALPHA</p>
+        <h2>Built around permission, not dashboards.</h2>
+      </div>
+      <ul>
+        <li><strong>Stage A:</strong> concurrent hard-allowance proof — PASS</li>
+        <li><strong>Stage B:</strong> spend / pause / resume / revoke / restart persistence — PASS live</li>
+        <li><strong>Stage C:</strong> ready for independent testing — not yet externally validated</li>
+      </ul>
+    </section>
+
+    <section class="boundary">
+      <h2>Current alpha boundary</h2>
+      <p>Local gateway · OpenAI only · Python 3.11+ · plain-text Responses requests · no hosted SaaS · no Stripe · no teams · no production-security claim.</p>
+      <a href="https://github.com/P-N-8/meterlock/blob/main/SECURITY.md">Read the security notes →</a>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap">MeterLock · Finite wallets for AI agents · External alpha</div>
+  </footer>
+</body>
+</html>
