@@ -2,6 +2,10 @@
 
 **Finite wallets for AI agents.**
 
+Development candidate: multi-model support is being prepared as **0.3.0a1**.
+See [MODEL_SUPPORT.md](MODEL_SUPPORT.md) for its models, pricing and verification
+limits. The published **0.2.0** wheel linked below remains unchanged and Luna-only.
+
 MeterLock is an early developer alpha for one simple problem:
 
 > Give this AI run a fixed amount of money. When the allowance is gone, further provider generation is refused.
