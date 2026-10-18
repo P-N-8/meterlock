@@ -4,8 +4,10 @@ Prepared 17 October 2026. This local candidate adds `gpt-6-luna` and `gpt-6-sol`
 alongside `gpt-5.6-luna`. Exact IDs only; unknown models and aliases are refused
 before any provider call. There is no silent model substitution.
 
-The published 0.2.0 wheel is unchanged and remains Luna-only. Nothing in this
-candidate has been live-qualified against OpenAI or tested on Windows.
+The published 0.2.0 wheel is unchanged and remains Luna-only. This candidate
+has not been live-qualified against OpenAI. Windows installation and the bounded
+offline version/model/pricing smoke test were reported PASS on 18 October 2026;
+Windows gateway operation and complete wallet lifecycle remain unverified.
 
 ## Request boundary
 
@@ -81,6 +83,48 @@ concerns Starlette's future replacement of its httpx test client transport.
 
 Before a public release: recheck pricing and model aliases, authorize tiny paid
 live checks for each model using a dedicated low-limit key, compare the count
-endpoint with returned usage and tier, test install/lifecycle on Windows, and
+endpoint with returned usage and tier, complete gateway/lifecycle checks on Windows, and
 update published install/recruitment guidance only after the artifact is available.
 Do not claim these checks have been performed based on offline tests.
+
+## Windows verification handoff — 18 October 2026
+
+Disposition: **PASS — Windows installation and bounded offline smoke test.**
+
+Evidence source: Penka's supplied Business-room Windows verification handoff,
+received in the Work room on 18 October 2026. These are reported observations
+from the owner-run Windows session, not an independent Work-room rerun.
+
+- Environment: Windows, Python 3.12.10, isolated
+  `C:\Users\penka\MeterLock-Test\.venv`.
+- Candidate: `meterlock_alpha-0.3.0a1-py3-none-any.whl`, built from source commit
+  `a2609fa56e4ffa70b9d3af8d563f792896836021`.
+- Downloaded wheel SHA-256 was reported to match:
+  `05220644a9000cbadb95bf8224832900d2c3c6e65e9ca05d292ecfe74f3fff64`.
+- Local wheel and dependencies installed successfully.
+- The offline smoke command checked installed version `0.3.0a1`, the exact three
+  supported model IDs, and reservations of 78,800 / 37,000 / 740,000 nanodollars
+  for 100 input tokens and a 16-token output cap, in registry order.
+- Exact reported output:
+  `PASS: MeterLock 0.3.0a1 offline version/model/pricing checks. No API calls.`
+- No OpenAI API requests, credentials, gateway startup or paid testing occurred.
+- The Windows test session made no merge, release, deployment or repository changes.
+
+This establishes installation and that specific smoke test only. Live API
+compatibility, Windows gateway operation and complete wallet lifecycle remain
+unverified. The original wheel is unchanged; this record update changes no
+runtime code, model rates or candidate artifact.
+
+### Next smallest proposed gate — not executed
+
+Run a bounded **offline Windows wallet lifecycle test** against the installed
+candidate, using a simulated provider and a fresh temporary SQLite database.
+Check scoped-key authentication; model-specific reservation and reconciliation;
+refusal of an unaffordable request before simulated generation; pause/resume;
+permanent revoke; and persistence after reopening the ledger. Block outbound
+provider connections. Use no real credentials, gateway startup or paid requests.
+
+This gate can verify wallet behavior on Windows without consuming API credit.
+It does not qualify actual gateway startup or OpenAI compatibility. Prepare and
+review its exact procedure before guiding owner execution. No live testing,
+merge, release or deployment is authorized by this verification handoff.
