@@ -9,6 +9,7 @@ import time
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 from pathlib import Path
 
+from . import __version__
 from .config import NANODOLLARS_PER_DOLLAR
 from .ledger import SQLiteLedger
 
@@ -145,7 +146,7 @@ def cmd_revoke(args: argparse.Namespace) -> int:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="meterlock", description="MeterLock external developer alpha")
-    parser.add_argument("--version", action="version", version="MeterLock external alpha 0.3.0a1")
+    parser.add_argument("--version", action="version", version=f"MeterLock external alpha {__version__}")
     sub = parser.add_subparsers(dest="command", required=True)
 
     p = sub.add_parser("start", help="start the local MeterLock gateway")
