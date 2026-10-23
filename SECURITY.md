@@ -1,38 +1,44 @@
-# Security — external alpha
+# Security — MeterLock alpha
 
-MeterLock v0.2.0 is an experimental local developer alpha, not production-security software.
+MeterLock 0.3.0a3 is experimental local developer-alpha software, not production-security software.
 
-## Test safely
+## Current visible-alpha boundary
 
-- Use a dedicated temporary OpenAI API key.
-- Put that key in a provider project with a very small hard spend limit.
-- Use tiny MeterLock wallets.
-- Do not use production workloads or sensitive prompts.
-- Revoke the upstream provider key after testing.
-- Never post an OpenAI key or `mlk_live_...` key in a GitHub issue, screenshot, chat, or log.
+The visible alpha:
 
-## Current data handling
+- binds its browser UI and internal sample action target to `127.0.0.1`;
+- uses persisted local SQLite state;
+- has no account/login;
+- needs no provider key;
+- performs no paid provider request;
+- exposes no arbitrary external endpoint field in the normal UI.
 
-The local SQLite ledger stores:
+Host checks, same-origin requests and a local request nonce reduce accidental/unrelated browser driving of the local UI. They are interface protections, not a hostile-code sandbox.
 
-- lock ID and label;
-- budget, spent, reserved and remaining accounting state;
-- expiry / pause / revoke state;
-- SHA-256 digest of the scoped MeterLock key;
-- reservation records.
+## Trusted-owner limitation
 
-MeterLock does not intentionally persist:
+A machine/storage/code owner can still bypass MeterLock by modifying code, changing identities or data directories, or deleting/restoring local state. MeterLock enforces actions that are actually routed through its control path.
 
-- the upstream OpenAI API key;
-- plaintext scoped MeterLock keys;
-- prompt bodies;
-- response bodies.
+A failed or interrupted action may still consume an already committed attempt. There is no exactly-once delivery guarantee and no authenticated human-approval system.
 
-Prompts and responses necessarily transit the local gateway process in memory in order to forward requests.
+## Existing provider gateway
+
+The repository also contains the earlier experimental provider gateway / finite-wallet path.
+
+If testing that path:
+
+- use a dedicated temporary provider key;
+- use the provider's own small hard project limit;
+- use tiny MeterLock wallets;
+- avoid production workloads and sensitive prompts;
+- revoke temporary credentials after testing;
+- never post provider keys or scoped MeterLock keys in issues, screenshots, chats or logs.
+
+MeterLock does not intentionally persist upstream provider keys, plaintext scoped MeterLock keys, prompts or response bodies in its wallet ledger.
 
 ## Failure policy
 
-If a provider call fails after MeterLock has authorised/dispatched it and the actual cost cannot be known safely, the alpha conservatively treats the full reservation as spent rather than returning uncertain money to the wallet.
+Where cost or authority has been committed before an external action and the final outcome cannot be known safely, the alpha fails conservatively rather than silently refunding uncertain authority.
 
 ## Reporting
 
