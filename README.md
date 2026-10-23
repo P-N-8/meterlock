@@ -4,7 +4,7 @@
 
 MeterLock is an early local developer alpha for enforcing finite authority outside an AI model.
 
-Current release candidate: **0.3.0a3**.
+**Free public alpha: 0.3.0a3 — [Download the verified release](https://github.com/P-N-8/meterlock/releases/tag/v0.3.0a3).**
 
 It currently demonstrates two bounded controls:
 
@@ -100,7 +100,7 @@ Do not use production credentials, sensitive workloads or meaningful spend limit
 
 ## Status
 
-**0.3.0a3 release candidate:** local visible authority alpha proven on Windows and ready for launch preparation.
+**0.3.0a3 public pre-release:** downloadable, locally runnable visible authority alpha, independently qualified on Windows for the bounded demo described above.
 
 Not yet claimed:
 
