@@ -1,48 +1,31 @@
-# External-alpha recruitment copy
+# MeterLock 0.3.0a3 — prospective early-access outreach
+
+**Status:** draft outreach copy only. The 0.3.0a3 candidate is verified locally but is not yet published as a downloadable GitHub Release. Do not promise an available installer or live provider integration.
 
 ## Short version
 
-Built a local OpenAI gateway that gives one AI agent/run a **finite wallet**.
+**Your AI cannot exceed the authority you gave it.**
 
-Looking for 3–5 technical alpha testers.
+MeterLock is a local developer alpha for finite external authority. Give a named action three attempts; the fourth is stopped before reaching its local target. Or try a $1 simulated spend wallet; the sixth $0.20 spend is refused. Exhaustion survives restart, and Recent Activity shows what was allowed or blocked.
 
-- Windows / Python / OpenAI API preferred
-- about 10–15 minutes
-- **100% async — no calls, Zooms, meetings, or calendar booking**
-- test: create a $0.01 wallet → spend → pause → resume → revoke
-- early alpha: use a disposable low-limit provider key and no sensitive prompts
+We're preparing a downloadable 0.3.0a3 alpha and looking for early users building AI agents who need actual external limits, not instructions in a prompt. No API key, real money, meeting or call is required for the visible demo.
 
 GitHub: https://github.com/P-N-8/meterlock
 
 ## Longer version
 
-I built an early local developer alpha called **MeterLock**.
+MeterLock sits outside an AI model and enforces the finite authority that a trusted owner configured, **for actions routed through MeterLock**.
 
-The idea is simple: instead of setting a monthly limit for an entire provider project, give one AI agent/run a finite wallet. MeterLock reserves budget before forwarding a supported generation request and refuses a request when the remaining wallet cannot authorise it.
+The currently verified local browser alpha demonstrates:
+- Attempt Lock: three permitted local HTTP actions, fourth refused before dispatch;
+- Spend Lock: a simulated $1 finite wallet, with five $0.20 spends allowed and sixth refused;
+- STOP / ASK HUMAN on exhaustion;
+- persistence across restart and a Recent Activity view.
 
-I am looking for 3–5 independent technical testers who already use the OpenAI API.
+The visible demo requires Python 3.11+, a browser and a trusted local machine. It uses no provider credentials, paid API call, account or cloud backend. The current version is a release candidate, not a public downloadable release yet.
 
-Current alpha:
-- local gateway
-- OpenAI only
-- Python 3.11+
-- Windows is the most-tested path
-- tiny test wallets only
+We are especially interested in hearing where an external finite-authority check would fit in real agent workflows and what makes installation difficult. Async messages only; no calls or meetings.
 
-The test should take roughly 10–15 minutes if installation goes smoothly.
+This is experimental developer-alpha software, not a sandbox for hostile code or a production-security boundary. The current real-provider gateway is separate experimental functionality and has not been qualified by the visible demo.
 
-**No calls or meetings. This is deliberately asynchronous.**
-
-The task is:
-1. install MeterLock;
-2. create a $0.01 wallet;
-3. send a request through it;
-4. pause and confirm another request is blocked;
-5. resume and confirm it can run;
-6. revoke and confirm the scoped key is dead.
-
-If installation fails, that is useful evidence too.
-
-Please use a dedicated low-limit OpenAI project/key and no sensitive prompts.
-
-https://github.com/P-N-8/meterlock
+GitHub: https://github.com/P-N-8/meterlock
