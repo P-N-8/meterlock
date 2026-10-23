@@ -3,67 +3,44 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>MeterLock — Finite wallets for AI agents</title>
-  <meta name="description" content="Give one AI agent or unattended run a finite wallet. Pause, resume or revoke it before spend runs away.">
+  <title>MeterLock — Finite authority for AI actions</title>
+  <meta name="description" content="Your AI cannot exceed the authority you gave it. Local developer alpha demonstrating finite attempts and spend with enforced STOP / ASK HUMAN.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main class="wrap">
     <section class="hero">
       <div class="mark" aria-hidden="true">ML<span>⌁</span></div>
-      <p class="eyebrow">EXTERNAL DEVELOPER ALPHA · v0.2.0</p>
-      <h1>Give an AI agent<br><em>a finite wallet.</em></h1>
-      <p class="lede">MeterLock is a local spend-control gateway for unattended AI runs. It reserves budget before generation, then blocks requests that no longer fit inside the wallet you authorised.</p>
+      <p class="eyebrow">LOCAL DEVELOPER ALPHA · 0.3.0a3 RELEASE CANDIDATE</p>
+      <h1>Your AI cannot exceed<br><em>the authority you gave it.</em></h1>
+      <p class="lede">MeterLock enforces finite authority outside the model. Grant a named action a limited number of attempts or give a run a finite spend wallet. Once exhausted, MeterLock refuses further actions routed through its lock with <strong>STOP / ASK HUMAN</strong>.</p>
       <div class="actions">
-        <a class="primary" href="https://github.com/P-N-8/meterlock">Test the alpha</a>
-        <a class="secondary" href="https://github.com/P-N-8/meterlock/blob/main/ALPHA_TEST.md">See the 10-minute test</a>
+        <a class="primary" href="https://github.com/P-N-8/meterlock">Explore MeterLock on GitHub</a>
+        <a class="secondary" href="https://github.com/P-N-8/meterlock/blob/main/VISIBLE_ALPHA.md">See the tested alpha</a>
       </div>
-      <p class="note">Async testing only. No calls. No meetings. Use a dedicated low-limit OpenAI key and tiny test wallets.</p>
+      <p class="note">0.3.0a3 is a verified local release candidate, not yet a public download. No provider key or real spend is needed for the visible demo. No calls or meetings required.</p>
     </section>
-
     <section class="grid">
-      <article>
-        <span class="num">01</span>
-        <h2>Create a wallet</h2>
-        <p>Set a budget and expiry for one specific agent or run.</p>
-      </article>
-      <article>
-        <span class="num">02</span>
-        <h2>Hand over a scoped key</h2>
-        <p>The agent receives a MeterLock key tied to that wallet — not your upstream provider key.</p>
-      </article>
-      <article>
-        <span class="num">03</span>
-        <h2>Stop spend before generation</h2>
-        <p>Budget is reserved before forwarding. If the request will not fit, generation is refused.</p>
-      </article>
-      <article>
-        <span class="num">04</span>
-        <h2>Pause, resume, revoke</h2>
-        <p>Pause temporarily, resume when ready, or revoke the scoped key permanently.</p>
-      </article>
+      <article><span class="num">01</span><h2>Set an attempt limit</h2><p>A named local action receives a finite number of attempts, consumed before dispatch.</p></article>
+      <article><span class="num">02</span><h2>Observe the refusal</h2><p>After three permitted actions, the fourth returns STOP / ASK HUMAN before reaching the local target. Exhaustion survives restart.</p></article>
+      <article><span class="num">03</span><h2>Try the spend limit</h2><p>The browser demo simulates a $1 wallet and five $0.20 spends. The sixth is refused. No paid provider request is sent.</p></article>
+      <article><span class="num">04</span><h2>See recent activity</h2><p>Inspect the persisted record of permitted and blocked actions. MeterLock enforces the actions actually routed through it.</p></article>
     </section>
-
     <section class="proof">
-      <div>
-        <p class="eyebrow">PROVEN BEFORE EXTERNAL ALPHA</p>
-        <h2>Built around permission, not dashboards.</h2>
-      </div>
+      <div><p class="eyebrow">EVIDENCE, NOT A SECURITY PROMISE</p><h2>Finite authority you can see.</h2></div>
       <ul>
-        <li><strong>Stage A:</strong> concurrent hard-allowance proof — PASS</li>
-        <li><strong>Stage B:</strong> spend / pause / resume / revoke / restart persistence — PASS live</li>
-        <li><strong>Stage C:</strong> ready for independent testing — not yet externally validated</li>
+        <li><strong>148 offline tests:</strong> passed against the installed 0.3.0a3 wheel</li>
+        <li><strong>Windows:</strong> visible Attempt Lock and Spend Lock exhaustion and restart persistence observed</li>
+        <li><strong>Local browser UI:</strong> no account, provider key, or cloud backend required</li>
+        <li><strong>Next:</strong> public distribution and one narrow real-provider path remain to be qualified</li>
       </ul>
     </section>
-
     <section class="boundary">
-      <h2>Current alpha boundary</h2>
-      <p>Local gateway · OpenAI only · Python 3.11+ · plain-text Responses requests · no hosted SaaS · no Stripe · no teams · no production-security claim.</p>
-      <a href="https://github.com/P-N-8/meterlock/blob/main/SECURITY.md">Read the security notes →</a>
+      <h2>What it does not claim</h2>
+      <p>Trusted-owner local developer alpha only. No hostile-code sandbox, authenticated approval workflow, signed installer, hosted billing, broad provider support or production-security guarantee. A caller that bypasses the control path is outside this enforcement boundary.</p>
+      <a href="https://github.com/P-N-8/meterlock/blob/main/SECURITY.md">Read the alpha security boundary →</a>
     </section>
   </main>
-  <footer>
-    <div class="wrap">MeterLock · Finite wallets for AI agents · External alpha</div>
-  </footer>
+  <footer><div class="wrap">MeterLock · Finite external authority for AI actions · Local developer alpha</div></footer>
 </body>
 </html>

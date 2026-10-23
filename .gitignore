@@ -8,6 +8,7 @@ __pycache__/
 .env
 .env.*
 build/
+candidate_dist/
 dist/*
 !dist/meterlock_alpha-0.2.0-py3-none-any.whl
 *.egg-info/

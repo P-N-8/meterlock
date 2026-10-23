@@ -1,44 +1,42 @@
-# MeterLock external alpha test
+# MeterLock 0.3.0a3 — local alpha check
 
-We are looking for a small number of independent technical testers.
+This check is for the visible local authority alpha. It does not require an API key or real money.
 
-Please do not evaluate the idea in the abstract. Try the workflow.
+## Prerequisites
 
-## The task
+- Python 3.11+
+- venv / pip
+- a browser
+- a trusted local computer
 
-1. Install MeterLock from the README.
-2. Start the local gateway with a **dedicated low-limit OpenAI key**.
-3. Create a **$0.01** wallet that expires in 30 minutes.
-4. Send at least one supported request through the MeterLock base URL using the returned `mlk_live_...` key.
-5. Run `meterlock status LOCK_ID`.
-6. Pause the lock and confirm another request is blocked.
-7. Resume it and confirm a request can run again.
-8. Revoke it and confirm the scoped key cannot spend again.
+## Check the core story
 
-Do not use production credentials, sensitive prompts, valuable workloads, or a provider project without its own small hard limit.
+1. Start the extracted alpha with `py -3 -I launch_meterlock.py` (or `python -I launch_meterlock.py`).
+2. Confirm the first Attempt Lock shows limit 3, used 0, remaining 3.
+3. Run the local action three times.
+4. Confirm the counters show 3 / 3 / 0.
+5. Try a fourth time.
+6. Confirm MeterLock shows **STOP / ASK HUMAN** and the action is blocked.
+7. Stop MeterLock and start it again.
+8. Confirm the Attempt Lock remains exhausted.
+9. Use the $1.00 sample Spend Lock for five $0.20 spends.
+10. Confirm the sixth spend is refused with **STOP / ASK HUMAN**.
+11. Restart again and confirm the exhausted spend state remains.
+12. Check Recent activity for allowed and blocked entries.
 
-## Supported request
+## What this proves
 
-The current alpha accepts only:
+It proves the visible local path can consume finite authority, refuse after exhaustion, and preserve the exhausted state across restart.
 
-- `POST /v1/responses`
-- model `gpt-5.6-luna`
-- non-empty plain-text `input`
-- explicit `max_output_tokens` from 16 to 500
+It does **not** prove production security, arbitrary-code containment, broad provider compatibility or a signed consumer installer.
 
-## What we want to learn
+## Reporting bugs
 
-Open one GitHub issue titled `Alpha feedback: <short description>` and tell us:
+For a non-sensitive bug, open a GitHub issue with:
 
 - operating system;
 - Python version;
-- whether installation worked without bespoke help;
-- whether the finite-wallet idea was immediately understandable;
-- where you got stuck;
-- whether pause/resume/revoke behaved as expected;
-- whether you would use this for an unattended agent/run;
-- whether you would pay for a polished self-service version, and roughly what problem it would need to protect.
+- exact step that failed;
+- exact error text if available.
 
-Please do **not** include API keys, scoped MeterLock keys, prompts containing private data, or other secrets in issues or screenshots.
-
-A failed install is useful evidence. Tell us the exact step and error instead of fighting it for an hour.
+Do not post secrets, API keys, private prompts or sensitive data.

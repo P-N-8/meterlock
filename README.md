@@ -1,111 +1,117 @@
 # MeterLock 🔒
 
-**Finite wallets for AI agents.**
+**Your AI cannot exceed the authority you gave it.**
 
-MeterLock is an early developer alpha for one simple problem:
+MeterLock is an early local developer alpha for enforcing finite authority outside an AI model.
 
-> Give this AI run a fixed amount of money. When the allowance is gone, further provider generation is refused.
+Current release candidate: **0.3.0a3**.
 
-MeterLock sits in the request path, reserves budget **before** forwarding a generation request, then reconciles the reservation against actual usage. The current alpha runs locally on your machine and supports OpenAI only.
+It currently demonstrates two bounded controls:
 
-## Why this exists
+- **Attempt Lock** — allow a named action only a fixed number of attempts.
+- **Spend Lock** — give an AI run a finite wallet and refuse further spend when the allowance is exhausted.
 
-Provider-level monthly budgets are useful, but they answer a different question.
+When authority runs out, MeterLock returns **STOP / ASK HUMAN** instead of relying on the model to remember a rule.
 
-MeterLock is aimed at:
+## See it hold
 
-- one agent;
-- one unattended run;
-- one explicit wallet;
-- one expiry;
-- pause / resume / permanent revoke.
+The tiny visible alpha runs as a local browser app and needs no provider key or real money.
 
-The control object is the **agent/run**, not the whole provider account or project.
+The default Attempt Lock starts at three attempts:
 
-## External alpha v0.2.0
+1. run the local action three times;
+2. watch Used reach 3 and Remaining reach 0;
+3. try a fourth time;
+4. MeterLock refuses it before dispatch with **STOP / ASK HUMAN**;
+5. restart MeterLock and the exhausted state is still there.
 
-Current boundary:
+The sample Spend Lock starts at $1.00 and simulates $0.20 spends. Five are allowed; the sixth is refused.
 
-- local gateway only;
-- OpenAI only;
-- model: `gpt-5.6-luna`;
-- plain-text Responses requests only;
-- explicit `max_output_tokens` from 16 to 500;
-- persistent local SQLite ledger;
-- scoped `mlk_live_...` key per wallet;
-- upstream OpenAI key is held by the running process and is not written to the MeterLock database;
-- no prompt/response persistence by MeterLock.
+Recent activity shows what MeterLock allowed and what it stopped.
 
-This is **not production software**. Use a dedicated low-limit OpenAI project/key and tiny test wallets.
+## Windows alpha
 
-## Fast tester path
+Requires Python 3.11+ with `venv` / `pip` and a browser.
 
-Requires Python 3.11+.
+The Windows-observed tester bundle is designed to be extracted completely, then launched from Command Prompt inside the extracted folder:
 
-Install the alpha wheel:
-
-```powershell
-python -m pip install https://raw.githubusercontent.com/P-N-8/meterlock/main/dist/meterlock_alpha-0.2.0-py3-none-any.whl
+```cmd
+py -3 -I launch_meterlock.py
 ```
 
-Start MeterLock:
+If the `py` launcher is unavailable:
 
-```powershell
-meterlock start
+```cmd
+python -I launch_meterlock.py
 ```
 
-Paste your temporary OpenAI API key into the hidden prompt.
+The launcher verifies the exact bundled wheel, creates a separate private runtime without downloads, and opens the browser UI.
 
-In a second terminal, create a tiny wallet:
+Do **not** disable Windows Smart App Control. An earlier unsigned `.cmd` convenience launcher was blocked during the first real Windows UI session, so the corrected tester path uses Python directly. A future consumer-style Windows distribution should use an appropriately signed launcher or installer.
 
-```powershell
-meterlock create --label first-test --budget 0.01 --minutes 30
-```
+## What is enforced today
 
-MeterLock returns:
+### Attempt Lock
 
-- a Lock ID;
-- a one-time scoped `mlk_live_...` key;
-- the local base URL `http://127.0.0.1:8787/v1`.
+- immutable configured attempt limit for a task/action identity;
+- atomic reservation before action dispatch;
+- exhaustion refuses execution with `STOP` / `ASK_HUMAN`;
+- failures and interrupted actions still consume committed attempts;
+- exhaustion survives process restart;
+- recreating the same authority cannot reset it.
 
-Point an OpenAI-compatible client at that base URL and use the scoped MeterLock key instead of the upstream OpenAI key.
+The current HTTP adapter demonstrates this boundary against a fixed local HTTP target. It is an adapter, not a universal sandbox.
 
-Control the wallet:
+### Spend Lock
 
-```powershell
-meterlock list
-meterlock status LOCK_ID
-meterlock pause LOCK_ID
-meterlock resume LOCK_ID
-meterlock revoke LOCK_ID
-```
+The existing wallet path reserves budget before a supported provider request, reconciles against actual usage, and supports pause, resume and permanent revoke.
 
-Revocation is permanent.
+The visible alpha uses a local sample wallet so the control can be understood without credentials or paid requests.
 
-For the exact tester task and what feedback we need, see [ALPHA_TEST.md](ALPHA_TEST.md).
+## Verification
 
-## What MeterLock does not do yet
+Current 0.3.0a3 evidence:
 
-No hosted SaaS. No accounts. No Stripe. No Anthropic. No teams. No routing. No anomaly detection. No historical provider billing. No tool-call support. No production-security claim.
+- **148 offline tests passed** against the installed wheel;
+- all 135 predecessor wallet / Attempt Lock / HTTP tests remain unchanged;
+- Chromium desktop and phone-width UI checks passed;
+- real Windows visible-alpha session passed the core user story:
+  - 3 allowed attempts → fourth refused;
+  - restart → still exhausted;
+  - $1.00 sample wallet → sixth $0.20 spend refused;
+  - restart → exhausted spend state persisted;
+  - Recent activity persisted.
 
-The point of this alpha is to answer one commercial question:
+See [VISIBLE_ALPHA.md](VISIBLE_ALPHA.md) for the detailed alpha contract and verification boundary.
 
-**Can a developer install this, give one AI run a finite wallet, and find that useful without bespoke help from us?**
+## Trust boundary
 
-## Privacy boundary
+This is **alpha software**, not a hostile-code sandbox.
 
-MeterLock's local ledger stores wallet/accounting state and SHA-256 digests of scoped MeterLock keys. The upstream OpenAI key is not stored in that database. Prompts and responses transit the local gateway but are not intentionally persisted by MeterLock.
+A trusted machine/storage owner can bypass the wrapper, alter or restore local state, choose a different identity or data directory, or modify the code. MeterLock currently enforces the path that is routed through it; it does not claim to make arbitrary local code unable to escape.
 
-Read [SECURITY.md](SECURITY.md) before testing.
+No authenticated human-approval system or exactly-once delivery guarantee exists yet.
+
+## Provider path
+
+The repository also contains the earlier OpenAI-compatible local gateway / finite-wallet work. That path is separate from the no-credential visible demo and should still be treated as experimental developer-alpha functionality.
+
+Do not use production credentials, sensitive workloads or meaningful spend limits.
 
 ## Status
 
-Stage A: hard concurrent authorization proof — PASS.
+**0.3.0a3 release candidate:** local visible authority alpha proven on Windows and ready for launch preparation.
 
-Stage B: scoped wallet lifecycle (spend / pause / resume / revoke / restart persistence) — PASS live.
+Not yet claimed:
 
-Stage C: external developer alpha — **ready for independent testing; not yet externally validated**.
+- production security;
+- signed consumer installer;
+- hosted SaaS;
+- accounts or teams;
+- billing;
+- broad provider compatibility;
+- arbitrary external-action sandboxing.
 
----
+The product question is deliberately simple:
 
-**Alpha warning:** spend real money only with tiny limits and a disposable/dedicated provider key.
+> **Can an AI be given finite authority that remains enforceable even when the model itself keeps trying?**
