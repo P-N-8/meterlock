@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>MeterLock — Finite authority for AI actions</title>
   <meta name="description" content="Your AI cannot exceed the authority you gave it. Local developer alpha demonstrating finite attempts and spend with enforced STOP / ASK HUMAN.">
+  <link rel="canonical" href="https://p-n-8.github.io/meterlock/">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MeterLock — Your AI cannot exceed the authority you gave it">
+  <meta property="og:description" content="Three actions allowed. The fourth refused. Try finite attempts and simulated spending in a free local developer alpha, with STOP / ASK HUMAN outside the AI model.">
+  <meta property="og:url" content="https://p-n-8.github.io/meterlock/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="MeterLock — Finite authority for AI actions">
+  <meta name="twitter:description" content="Three actions allowed. The fourth refused before dispatch. Free local AI authority demo.">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"MeterLock","applicationCategory":"DeveloperApplication","description":"Early local developer alpha demonstrating finite attempts and simulated spend limits for AI actions routed through an external authority layer.","url":"https://p-n-8.github.io/meterlock/","softwareVersion":"0.3.0a3","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}
+  </script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,6 +31,20 @@
         <a class="secondary" href="https://github.com/P-N-8/meterlock/blob/main/VISIBLE_ALPHA.md">See the tested alpha</a>
       </div>
       <p class="note">Free public alpha v0.3.0a3 is available now. <a href="https://github.com/P-N-8/meterlock/releases/tag/v0.3.0a3">Release details and checksums</a>. Requires Python 3.11+ and a browser. No AI provider key or real spending is needed for the visible demo.</p>
+    </section>
+    <section class="sequence" aria-labelledby="sequence-heading">
+      <div class="sequence-copy">
+        <p class="eyebrow">THE REFUSAL, IN FOUR ACTIONS</p>
+        <h2 id="sequence-heading">Three allowed. The fourth refused.</h2>
+        <p>This illustrative sequence reflects the locally runnable Attempt Lock demo. The limit is enforced before dispatch for actions actually routed through MeterLock.</p>
+      </div>
+      <ol class="sequence-steps" aria-label="Four actions under an attempt limit of three">
+        <li class="allowed"><span>01 / First action</span><strong>ALLOW</strong></li>
+        <li class="allowed"><span>02 / Second action</span><strong>ALLOW</strong></li>
+        <li class="allowed"><span>03 / Third action</span><strong>ALLOW</strong></li>
+        <li class="stopped"><span>04 / Fourth action</span><strong>STOP / ASK HUMAN</strong></li>
+      </ol>
+      <p class="sequence-foot">Exhaustion survives restart in the local demo. <a href="https://github.com/P-N-8/meterlock/releases/tag/v0.3.0a3">Download it and see the refusal yourself.</a> No provider key or real spend required.</p>
     </section>
     <section class="grid">
       <article><span class="num">01</span><h2>Set an attempt limit</h2><p>A named local action receives a finite number of attempts, consumed before dispatch.</p></article>
