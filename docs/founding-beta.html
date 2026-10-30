@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MeterLock Action Guard — Founding Beta</title>
+<meta name="description" content="MeterLock Action Guard: finite external authority for trusted local commands in AI workflows. One-time founding access through v1.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="style.css">
+<style>
+.beta-wrap{max-width:900px;margin:auto;padding:80px 0 100px}
+.beta-tag{color:#c8c0ff;font-size:13px;letter-spacing:.14em;font-weight:850}
+.beta-wrap h1{font-size:clamp(42px,7vw,78px);line-height:1.02;margin:18px 0 25px}
+.beta-lede{color:#c7cbd3;font-size:clamp(18px,2.6vw,24px);line-height:1.6;max-width:780px}
+.beta-price{display:inline-flex;align-items:baseline;gap:8px;margin:32px 0 8px}
+.beta-price strong{font-size:42px}
+.beta-price span,.beta-subtle{color:var(--muted);font-size:15px;line-height:1.6}
+.beta-box{margin:44px 0;padding:28px;border:1px solid #3f3a60;border-radius:16px;background:#161521}
+.beta-box h2{margin:0 0 14px;font-size:26px}
+.beta-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;list-style:none;padding:0;margin:22px 0}
+.beta-steps li{border:1px solid #353644;border-radius:10px;padding:15px;font-size:14px;color:#c7cbd3}
+.beta-steps li b{display:block;margin-top:10px;color:#b7e9c6}
+.beta-steps li:last-child{background:#32273c;border-color:#9b8cff}
+.beta-steps li:last-child b{color:#e1d7ff}
+.beta-columns{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.beta-columns article{padding:18px 20px;border:1px solid var(--line);border-radius:14px}
+.beta-columns h2{font-size:23px;margin:5px 0}
+.beta-columns p{color:var(--muted);line-height:1.6}
+.beta-primary{display:inline-block;padding:16px 20px;border-radius:10px;background:#e9e5ff;color:#100f18;text-decoration:none;font-weight:850}
+.beta-locked{opacity:.8;padding:12px 0}
+.beta-faq h2{font-size:26px}
+.beta-faq p{color:var(--muted);line-height:1.7}
+@media(max-width:680px){.beta-wrap{padding:55px 0 80px}.beta-steps,.beta-columns{grid-template-columns:1fr 1fr}.beta-steps li{font-size:12px}.beta-box{padding:18px}}
+</style>
+</head><body><main class="wrap beta-wrap">
+<p class="beta-tag">METERLOCK / ACTION GUARD / FOUNDING BETA</p>
+<h1>Give an AI workflow<br><em>three chances. Not four.</em></h1>
+<p class="beta-lede">Wrap a real local command with a finite attempt allowance. The limit is stored outside the model, consumed before the command starts, and persists after restart. When the allowance runs out: <strong>STOP / ASK HUMAN</strong>.</p>
+<div class="beta-price"><strong>€29</strong><span>one-time founding access through v1</span></div>
+<p class="beta-subtle">Early developer software · Async written feedback · No calls · No subscription</p>
+<div class="beta-locked"><strong>Checkout is not live.</strong> This is a staged product page awaiting private delivery and seller checkout setup. No payment is accepted here.</div>
+<section class="beta-box">
+<h2>One finite authority. One actual command.</h2>
+<ol class="beta-steps">
+<li>Command 1<b>ALLOW</b></li><li>Command 2<b>ALLOW</b></li>
+<li>Command 3<b>ALLOW</b></li><li>Command 4<b>STOP / ASK HUMAN</b></li>
+</ol>
+<p class="beta-subtle">Illustration of the shipped local command guard's enforcement flow. No child command is launched on refusal. This is not a universal agent sandbox.</p>
+<pre style="white-space:pre-wrap;overflow-wrap:anywhere;color:#eee;background:#0b0c11;padding:18px;border-radius:10px">meterlock-guard create --task report-001 --action generate --attempts 3
+meterlock-guard run --task report-001 --action generate -- python build_report.py</pre>
+</section>
+<div class="beta-columns">
+<article><h2>What you get</h2><p>Private Python 3.11+ Action Guard package for trusted local scripts and cooperatively routed AI command workflows. Durable SQLite attempt limits, command wrapper, status inspection, and a documented STOP exit code. Founding updates through v1.</p></article>
+<article><h2>What it isn't</h2><p>Not a hosted SaaS, code sandbox, global policy service, authenticated human approval, spend billing service, or universal control over arbitrary agent actions. The trusted local owner can always bypass the wrapper.</p></article>
+</div>
+<section class="beta-faq">
+<h2>Free alpha versus Founding Beta</h2>
+<p>The <a href="https://github.com/P-N-8/meterlock/releases/tag/v0.3.0a3">free public alpha</a> shows a fixed browser demonstration with Attempt Lock and simulated Spend Lock. The Founding Beta Action Guard adds a genuine command-line adapter for running your own local commands through finite Attempt Lock authority. The separate Spend Lock provider gateway remains experimental.</p>
+<h2>Who is this for?</h2>
+<p>Developers who own the command execution path on a trusted machine and can route their automations through the wrapper. You must use the same persistent database and stable task/action identity across invocations.</p>
+<h2>How is it delivered?</h2>
+<p>A private downloadable software ZIP with installation instructions, plus future founding-version updates. Final purchase terms, applicable taxes and refund disclosures will be shown by the checkout provider when sales open.</p>
+</section>
+<p class="beta-subtle"><a href="index.html">Back to MeterLock</a> · <a href="https://github.com/P-N-8/meterlock">GitHub project</a></p>
+</main></body></html>
